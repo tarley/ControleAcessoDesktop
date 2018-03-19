@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author tarle
  */
 public class FormLogin extends javax.swing.JDialog {
+    
+    public boolean isAutenticado;
 
     /**
      * Creates new form FormLogin
@@ -27,6 +29,8 @@ public class FormLogin extends javax.swing.JDialog {
     public FormLogin(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        getRootPane().setDefaultButton(btnEntrar);
     }
 
     /**
@@ -128,14 +132,19 @@ public class FormLogin extends javax.swing.JDialog {
                   + "   AND senha = '" + senha + "'");
             
             if(rs.next()) {
+                isAutenticado = true;
                 JOptionPane.showMessageDialog(null, "Sucesso!");
+                setVisible(false);
             } else {
+                isAutenticado = false;
                 JOptionPane.showMessageDialog(null, "Falhou!");
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
         
     }//GEN-LAST:event_btnEntrarActionPerformed
 
